@@ -1,0 +1,18 @@
+'copy_light_state_a':
+  alias: Copy Light State
+  sequence:
+    - service: light.turn_on
+      target:
+        entity_id: light.YOUR_LIGHTS_ENTITY_ID_A
+      data_template:
+        brightness: "{{ state_attr('light.YOUR_LIGHTS_ENTITY_ID_B', 'brightness') }}"  
+        rgb_color: "{{ state_attr('light.YOUR_LIGHTS_ENTITY_ID_B', 'rgb_color') }}"  
+'copy_light_state_b':
+  alias: Copy Light State
+  sequence:
+    - service: light.turn_on
+      target:
+        entity_id: light.YOUR_LIGHTS_ENTITY_ID_B 
+      data_template:
+        brightness: "{{ state_attr('light.YOUR_LIGHTS_ENTITY_ID_A', 'brightness') }}" 
+        rgb_color: "{{ state_attr('light.YOUR_LIGHTS_ENTITY_ID_A', 'rgb_color') }}" 
