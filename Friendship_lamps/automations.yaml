@@ -1,0 +1,20 @@
+alias: Synchronize Lights Bi-Directional
+trigger:
+  - platform: state
+    entity_id:
+      - light.YOUR_LIGHTS_ENTITY_ID_B 
+      - light.YOUR_LIGHTS_ENTITY_ID_A 
+condition: 
+  -  condition: template
+     value_template: "{{ is_state('script.copy_light_state_a', 'off') and is_state('script.copy_light_state_b', 'off') }}"
+action:
+  - choose:
+      - conditions:
+          - "{{ trigger.entity_id == 'light.YOUR_LIGHTS_ENTITY_ID_B' }}"
+        sequence:
+          - service: script.copy_light_state_a
+  - choose:
+      - conditions:
+          - "{{ trigger.entity_id == 'light.YOUR_LIGHTS_ENTITY_ID_A' }}"
+        sequence:
+          - service: script.copy_light_state_b
